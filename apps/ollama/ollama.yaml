@@ -16,6 +16,15 @@ spec:
     metadata:
       labels: { app: ollama }
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - k8s-node2
       containers:
       - name: ollama
         image: 192.168.30.11:80/ai/ollama:latest
